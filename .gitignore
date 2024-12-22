@@ -1,0 +1,6 @@
+target
+.env
+Cargo.lock
+data
+sqlite:data/mrs_funding.db
+*.db

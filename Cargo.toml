@@ -1,0 +1,32 @@
+[package]
+name = "mrs-funding-software"
+version = "0.0.1"
+edition = "2021"
+publish = false
+
+[dependencies]
+axum = {version = "0.7", features = ["macros"]}
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+dotenv = "0.15"
+axum-server = "0.7"
+hyper = { version = "1", features = ["full", "client"] }
+http-body-util = "0.1"
+hyper-util = { version = "0.1", features = ["full"] }
+askama = "0.12"
+rusqlite = { version = "0.32.1", features = ["chrono"] }
+chrono = "0.4"
+argon2 = "0.5"
+rand_core = { version = "0.6.4", features = ["std"] }
+thiserror = "2"
+anyhow = "1.0"
+tower-sessions = "0.13.0"
+tower = { version = "0.5", features = ["limit"]}
+tower-http = { version = "0.6", features = ["limit"] }
+axum_csrf = { version = "0.10", features = ["layer"] }
+tower_governor = "0.4"
+simple-hyper-client = "0.1"
+md5 = "0.7"
+[scripts]
+dev = "cargo watch -x run"

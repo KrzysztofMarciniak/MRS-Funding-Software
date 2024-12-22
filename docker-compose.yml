@@ -1,0 +1,47 @@
+services:
+  sqlite:
+    image: nouchka/sqlite3
+    container_name: sqlite-container
+    networks:
+      - internal_network
+    volumes:
+      - ./data:/data
+    command: ["sqlite3", "/data/mrs_funding.db"]
+    restart: unless-stopped
+
+  rust-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rust-app
+    networks:
+      - internal_network
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: cargo run
+    depends_on:
+      - sqlite
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=/data/mrs_funding.db
+      - RUST_LOG=info
+    restart: unless-stopped
+
+  nginx:
+    image: owasp/modsecurity-crs:nginx-alpine
+    container_name: nginx-container
+    networks:
+      - internal_network
+    volumes:
+      - ./nginx.conf:/etc/nginx/templates/conf.d/default.conf.template
+    ports:
+      - "80:80"
+    depends_on:
+      - rust-app
+    restart: unless-stopped
+
+networks:
+  internal_network:
+    driver: bridge

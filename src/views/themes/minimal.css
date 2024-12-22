@@ -1,0 +1,28 @@
+body {
+    background: #000;
+    color: #fff;
+    font: 16px/1.6 system-ui, sans-serif;
+}
+
+a { color: #0ff; }
+a:hover { opacity: 0.8; }
+
+.button {
+    background: #0ff;
+    color: #000;
+    border: 0;
+}
+
+main {
+    max-width: 60ch;
+    margin: 0 auto;
+}
+
+nav {
+    border-bottom: 1px solid #333;
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+}
